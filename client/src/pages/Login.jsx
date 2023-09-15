@@ -3,11 +3,24 @@ export default function Login() {
 		<>
 			<div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
 				<div className="sm:mx-auto sm:w-full sm:max-w-md">
-					<img
-						className="mx-auto h-10 w-auto"
-						src="https://tailwindui.com/img/logos/mark.svg?color=blue&shade=600"
-						alt="Your Company"
-					/>
+					<a
+						href="/"
+						className="flex justify-center items-center text-indigo-600 font-bold text-2xl">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							strokeWidth={1.5}
+							stroke="currentColor"
+							className="w-8 h-8 mr-2">
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+							/>
+						</svg>
+						Watchy
+					</a>
 					<h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
 						Sign in to your account
 					</h2>
@@ -149,9 +162,9 @@ export default function Login() {
 					<p className="mt-10 text-center text-sm text-gray-500">
 						Not a member?{" "}
 						<a
-							href="#"
+							href="/register"
 							className="font-semibold leading-6 text-blue-600 hover:text-blue-500">
-							Register Now
+							Create an Account
 						</a>
 					</p>
 				</div>
