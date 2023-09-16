@@ -159,31 +159,31 @@ const watchType = [
 		name: "Travel Watches",
 		href: "#",
 		imageSrc:
-			"https://tailwindui.com/img/ecommerce-images/home-page-01-category-01.jpg",
+			"https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/new-rolex-gmt-master-ii-front-1602184959.jpg?crop=1.00xw:0.648xh;0,0.0945xh&resize=980:*",
 	},
 	{
 		name: "Chronograph Watches",
 		href: "#",
 		imageSrc:
-			"https://tailwindui.com/img/ecommerce-images/home-page-01-category-02.jpg",
+			"https://cdn4.ethoswatches.com/the-watch-guide/wp-content/uploads/2021/05/Top-Chronograph-3-2.jpg?tr=q-70",
 	},
 	{
 		name: "Dress Watches",
 		href: "#",
 		imageSrc:
-			"https://tailwindui.com/img/ecommerce-images/home-page-01-category-04.jpg",
+			"https://monochrome-watches.com/wp-content/uploads/2023/04/Rolex-Perpetual-1908-Dress-Watch-Yellow-Gold-reference-52508-Calibre-7140-Hands-On-Review-8.jpg",
 	},
 	{
 		name: "Dive Watches",
 		href: "#",
 		imageSrc:
-			"https://tailwindui.com/img/ecommerce-images/home-page-01-category-05.jpg",
+			"https://watchbox-blog.imgix.net/wp-content/uploads/2021/02/Panerai-Divers-Watch-In-Water.jpg?max-w=1024&q=50&auto=format,compress&usm=10&usmrad=3",
 	},
 	{
-		name: "Sale",
+		name: "On Sale",
 		href: "#",
 		imageSrc:
-			"https://tailwindui.com/img/ecommerce-images/home-page-01-category-03.jpg",
+			"https://static.chrono24.com/magazine/wp-content/uploads/2019/11/Straps-Watchgecko-Tudor-Black-Bay-58.jpg",
 	},
 ];
 const accessories = [
@@ -191,31 +191,31 @@ const accessories = [
 		name: "Straps",
 		href: "#",
 		imageSrc:
-			"https://tailwindui.com/img/ecommerce-images/home-page-01-category-01.jpg",
+			"https://www.bartonwatchbands.com/cdn/shop/files/Elite_Silicone_31186251-e191-4bc1-b5d8-636035d10033.jpg?v=1614314904&width=1600",
 	},
 	{
 		name: "Travel & Storage",
 		href: "#",
 		imageSrc:
-			"https://tailwindui.com/img/ecommerce-images/home-page-01-category-02.jpg",
+			"https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/best-cases-rolls-and-pouches-lead-1620778139.jpg?crop=1.00xw:0.756xh;0,0.0416xh&resize=1200:*",
 	},
 	{
 		name: "Tools",
 		href: "#",
 		imageSrc:
-			"https://tailwindui.com/img/ecommerce-images/home-page-01-category-04.jpg",
+			"https://www.watchgecko.com/cdn/shop/articles/Link-Removal-Tool-2.jpg?v=1654779553",
 	},
 	{
 		name: "Books & Magazines",
 		href: "#",
 		imageSrc:
-			"https://tailwindui.com/img/ecommerce-images/home-page-01-category-05.jpg",
+			"https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/best-watch-books-refresh-lead-6477746245353.jpg?crop=1xw:1xh;center,top&resize=1200:*",
 	},
 	{
-		name: "Home",
+		name: "On Sale",
 		href: "#",
 		imageSrc:
-			"https://tailwindui.com/img/ecommerce-images/home-page-01-category-03.jpg",
+			"https://cdn.hiconsumption.com/wp-content/uploads/2021/06/Best-Watch-Accessories-0-Hero.jpg",
 	},
 ];
 const testimonials = [
@@ -266,7 +266,7 @@ const footerNavigation = {
 	],
 };
 
-export default function Landing() {
+const Landing = () => {
 	return (
 		<div className="bg-white">
 			{/* Hero */}
@@ -298,18 +298,11 @@ export default function Landing() {
 														className="h-full w-full object-none object-center"
 													/>
 												</div>
-												<div className="h-64 w-44 overflow-hidden rounded-lg">
-													<img
-														src={speedmaster}
-														alt="Omega Speedmaster"
-														className="h-full w-full object-none object-center"
-													/>
-												</div>
 											</div>
 											<div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
 												<div className="h-64 w-44 overflow-hidden rounded-lg">
 													<img
-														src={breitling}
+														src={speedmaster}
 														alt="Breitling Navitimer"
 														className="h-full w-full object-none object-center"
 													/>
@@ -321,27 +314,13 @@ export default function Landing() {
 														className="h-full w-full object-cover object-center"
 													/>
 												</div>
-												<div className="h-64 w-44 overflow-hidden rounded-lg">
-													<img
-														src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-05.jpg"
-														alt=""
-														className="h-full w-full object-cover object-center"
-													/>
-												</div>
 											</div>
 											<div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
 												<div className="h-64 w-44 overflow-hidden rounded-lg">
 													<img
-														src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-06.jpg"
+														src={breitling}
 														alt=""
-														className="h-full w-full object-cover object-center"
-													/>
-												</div>
-												<div className="h-64 w-44 overflow-hidden rounded-lg">
-													<img
-														src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-07.jpg"
-														alt=""
-														className="h-full w-full object-cover object-center"
+														className="h-full w-full object-none object-center"
 													/>
 												</div>
 											</div>
@@ -436,7 +415,7 @@ export default function Landing() {
 				<div className="relative overflow-hidden rounded-lg">
 					<div className="absolute inset-0">
 						<img
-							src="https://tailwindui.com/img/ecommerce-images/home-page-01-feature-section-01.jpg"
+							src="https://prestige-watches.co.uk/wp-content/uploads/top-selling-luxury-watch-brands.jpeg"
 							alt=""
 							className="h-full w-full object-cover object-center"
 						/>
@@ -537,7 +516,7 @@ export default function Landing() {
 											<img
 												src={category.imageSrc}
 												alt=""
-												className="h-full w-full object-cover object-center"
+												className="h-full w-full object-none object-center"
 											/>
 										</span>
 										<span
@@ -570,12 +549,12 @@ export default function Landing() {
 				<div aria-hidden="true" className="absolute inset-0">
 					<div className="absolute inset-0 mx-auto max-w-7xl overflow-hidden xl:px-8">
 						<img
-							src="https://tailwindui.com/img/ecommerce-images/home-page-02-sale-full-width.jpg"
+							src="https://prestige-watches.co.uk/wp-content/uploads/top-selling-luxury-watch-brands.jpeg"
 							alt=""
 							className="h-full w-full object-cover object-center"
 						/>
 					</div>
-					<div className="absolute inset-0 bg-white bg-opacity-75" />
+					<div className="absolute inset-0 bg-white bg-opacity-25" />
 					<div className="absolute inset-0 bg-gradient-to-t from-white via-white" />
 				</div>
 
@@ -589,7 +568,7 @@ export default function Landing() {
 							className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
 							Get 25% off during our one-time sale
 						</h2>
-						<p className="mx-auto mt-4 max-w-xl text-xl text-gray-600">
+						<p className="mx-auto mt-4 max-w-xl text-xl text-gray-700">
 							Most of our products are limited releases that won't come back.
 							Get your favorite items while they're in stock.
 						</p>
@@ -719,4 +698,6 @@ export default function Landing() {
 			</footer>
 		</div>
 	);
-}
+};
+
+export default Landing;
