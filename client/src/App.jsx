@@ -12,6 +12,7 @@ import ShoppingCart from "./pages/ShoppingCart";
 import Checkout from "./pages/Checkout";
 import Error from "./pages/404";
 import Sell from "./pages/Sell";
+import Account from "./pages/Account";
 
 function App() {
 	return (
@@ -24,6 +25,7 @@ function App() {
 				<Route path="/shopping-cart" element={<ShoppingCart />} />
 				<Route path="/checkout" element={<Checkout />} />
 				<Route path="/sell" element={<Sell />} />
+				<Route path="/account" element={<Account />} />
 			</Route>
 
 			{/* AUTH */}
