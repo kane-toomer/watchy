@@ -23,8 +23,16 @@ function classNames(...classes) {
 	return classes.filter(Boolean).join(" ");
 }
 
-export default function Example() {
+export default function Header() {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+	const [isAuthenticated, setIsAuthenticated] = useState(false); // Set this based on your authentication logic
+
+	// Function to handle user logout (if needed)
+	const handleLogout = () => {
+		// Perform logout logic here
+		setIsAuthenticated(false);
+		setMobileMenuOpen(false); // Close mobile menu after logout
+	};
 
 	return (
 		<div className="bg-white">
@@ -32,7 +40,7 @@ export default function Example() {
 			<Transition.Root show={mobileMenuOpen} as={Fragment}>
 				<Dialog
 					as="div"
-					className="relative z-40 lg:hidden"
+					className="fixed inset-0 z-40 lg:hidden"
 					onClose={setMobileMenuOpen}>
 					<Transition.Child
 						as={Fragment}
@@ -45,7 +53,7 @@ export default function Example() {
 						<div className="fixed inset-0 bg-black bg-opacity-25" />
 					</Transition.Child>
 
-					<div className="fixed inset-0 z-40 flex">
+					<div className="relative flex flex-col h-full">
 						<Transition.Child
 							as={Fragment}
 							enter="transition ease-in-out duration-300 transform"
@@ -54,11 +62,11 @@ export default function Example() {
 							leave="transition ease-in-out duration-300 transform"
 							leaveFrom="translate-x-0"
 							leaveTo="-translate-x-full">
-							<Dialog.Panel className="relative flex w-full max-w-xs flex-col overflow-y-auto bg-white pb-12 shadow-xl">
-								<div className="flex px-4 pb-2 pt-5">
+							<div className="absolute inset-0 bg-white shadow-xl">
+								<div className="flex items-center justify-between px-4 pt-5">
 									<button
 										type="button"
-										className="-m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400"
+										className="-m-2 p-2 rounded-md text-gray-400"
 										onClick={() => setMobileMenuOpen(false)}>
 										<span className="sr-only">Close menu</span>
 										<XMarkIcon className="h-6 w-6" aria-hidden="true" />
@@ -66,36 +74,53 @@ export default function Example() {
 								</div>
 
 								{/* Links */}
-
-								<div className="space-y-6 border-t border-gray-200 px-4 py-6">
+								<div className="pt-6 pb-2 space-y-6">
 									{navigation.pages.map((page) => (
 										<div key={page.name} className="flow-root">
 											<a
 												href={page.href}
-												className="-m-2 block p-2 font-medium text-gray-900">
+												className="-m-2 p-2 block font-medium text-gray-900">
 												{page.name}
 											</a>
 										</div>
 									))}
 								</div>
 
-								<div className="space-y-6 border-t border-gray-200 px-4 py-6">
-									<div className="flow-root">
-										<a
-											href="/register"
-											className="-m-2 block p-2 font-medium text-gray-900">
-											Create an account
-										</a>
-									</div>
-									<div className="flow-root">
-										<a
-											href="/login"
-											className="-m-2 block p-2 font-medium text-gray-900">
-											Sign in
-										</a>
-									</div>
+								{/* Authentication Links */}
+								<div className="border-t border-gray-200 pt-6 pb-4">
+									{isAuthenticated ? (
+										// If user is authenticated, display user's name and logout button
+										<div className="px-4">
+											<p className="text-base font-medium text-gray-900">
+												User's Name
+											</p>
+											<button
+												type="button"
+												onClick={handleLogout}
+												className="mt-2 text-base font-medium text-indigo-600 hover:text-indigo-500">
+												Logout
+											</button>
+										</div>
+									) : (
+										// If user is not authenticated, display "Create Account" and "Sign In" buttons
+										<div className="px-4">
+											<p className="text-base font-medium text-gray-900">
+												New customer?
+											</p>
+											<a
+												href="/register"
+												className="mt-2 block px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+												Create an account
+											</a>
+											<a
+												href="/login"
+												className="mt-2 block text-base font-medium text-indigo-600 hover:text-indigo-500">
+												Sign in
+											</a>
+										</div>
+									)}
 								</div>
-							</Dialog.Panel>
+							</div>
 						</Transition.Child>
 					</div>
 				</Dialog>
@@ -114,17 +139,35 @@ export default function Example() {
 							</p>
 
 							<div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-								<a
-									href="/register"
-									className="text-sm font-medium text-white hover:text-gray-100">
-									Create an account
-								</a>
-								<span className="h-6 w-px bg-gray-600" aria-hidden="true" />
-								<a
-									href="/login"
-									className="text-sm font-medium text-white hover:text-gray-100">
-									Sign in
-								</a>
+								{isAuthenticated ? (
+									// If user is authenticated, display user's name and logout button
+									<>
+										<span className="text-sm font-medium text-white">
+											User's Name
+										</span>
+										<button
+											type="button"
+											onClick={handleLogout}
+											className="text-sm font-medium text-white hover:text-gray-100">
+											Logout
+										</button>
+									</>
+								) : (
+									// If user is not authenticated, display "Create Account" and "Sign In" buttons
+									<>
+										<a
+											href="/register"
+											className="text-sm font-medium text-white hover:text-gray-100">
+											Create an account
+										</a>
+										<span className="h-6 w-px bg-gray-600" aria-hidden="true" />
+										<a
+											href="/login"
+											className="text-sm font-medium text-white hover:text-gray-100">
+											Sign in
+										</a>
+									</>
+								)}
 							</div>
 						</div>
 					</div>

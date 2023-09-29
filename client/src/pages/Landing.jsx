@@ -329,7 +329,7 @@ const Landing = () => {
 								</div>
 
 								<a
-									href="#"
+									href="/shop"
 									className="inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-center font-medium text-white hover:bg-indigo-700">
 									Shop Now
 								</a>
@@ -376,9 +376,9 @@ const Landing = () => {
 
 					<div className="mt-8 text-sm flex justify-center">
 						<a
-							href="#"
+							href="/shop"
 							className="font-medium text-white bg-indigo-500 p-6 rounded-lg hover:text-indigo-500 hover:bg-white hover:outline">
-							Shop All New Arrivals
+							Shop Now
 						</a>
 					</div>
 				</div>
@@ -430,7 +430,7 @@ const Landing = () => {
 								story.
 							</p>
 							<a
-								href="#"
+								href="/shop"
 								className="mt-8 inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-center font-medium text-white hover:bg-indigo-700">
 								Shop Now
 							</a>
