@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { useAuth } from "./context/AuthContext";
 import "./App.css";
 import Layout from "./components/Header/Layout";
 
@@ -14,6 +15,12 @@ import Error from "./pages/404";
 import Sell from "./pages/Sell";
 import Account from "./pages/Account";
 
+function PrivateRoute({ children }) {
+	const { user } = useAuth(); // Replace with your actual user authentication check
+
+	return user ? children : <Navigate to="/login" />;
+}
+
 function App() {
 	return (
 		<Routes>
@@ -25,7 +32,15 @@ function App() {
 				<Route path="/shopping-cart" element={<ShoppingCart />} />
 				<Route path="/checkout" element={<Checkout />} />
 				<Route path="/sell" element={<Sell />} />
-				<Route path="/account" element={<Account />} />
+				<Route
+					path="/account"
+					element={
+						<PrivateRoute>
+							<Account />
+						</PrivateRoute>
+					}
+				/>{" "}
+				{/* Protected route */}
 			</Route>
 
 			{/* AUTH */}
