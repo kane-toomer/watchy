@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import Redirect
-// ... Other imports ...
+import { useNavigate } from "react-router-dom";
+import { auth, signInWithEmailAndPassword } from "../firebase/firebase";
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -38,40 +38,31 @@ const Login = () => {
 		setLoading(true);
 
 		try {
-			// Simulate sending the user's login credentials to a server for verification
-			const response = await fetch("/api/login", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(formData),
-			});
+			const userCredential = await signInWithEmailAndPassword(
+				auth,
+				formData.email,
+				formData.password
+			);
+			const user = userCredential.user;
 
-			if (response.ok) {
-				// User is successfully authenticated
+			if (user) {
+				setAuthenticated(true);
+
 				if (formData.rememberMe) {
-					// Optionally, you can set a cookie or use localStorage to remember the user
+					localStorage.setItem("rememberMeToken", user.refreshToken);
 				}
 
-				// Reset form and show success message
 				setFormData({ email: "", password: "", rememberMe: false });
 				setSuccessMessage("Login successful! Redirecting...");
 				setErrorMessage(null);
 
-				// Redirect to the root path after a brief delay
 				setTimeout(() => {
 					navigate("/");
 				}, 1500);
-			} else {
-				// Handle authentication failure and display an error message
-				const errorData = await response.json();
-				setErrorMessage(errorData.message);
-				setSuccessMessage(null);
 			}
 		} catch (error) {
-			// Handle network errors or other exceptions
 			console.error("An error occurred during login:", error);
-			setErrorMessage("An error occurred. Please try again.");
+			setErrorMessage(error.message);
 			setSuccessMessage(null);
 		} finally {
 			setLoading(false);

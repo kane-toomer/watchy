@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { auth, createUserWithEmailAndPassword, db } from "../firebase/firebase";
+import { collection, doc, setDoc } from "firebase/firestore";
 
 const Register = () => {
 	const navigate = useNavigate();
@@ -25,36 +27,36 @@ const Register = () => {
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
 
-		try {
-			const response = await fetch("/api/register", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
+		if (formData.agreeCheck) {
+			try {
+				const userCredential = await createUserWithEmailAndPassword(
+					auth,
+					formData.email,
+					formData.password
+				);
+
+				const user = userCredential.user;
+
+				// Store additional data in Firestore
+				await setDoc(doc(db, "users", user.uid), {
 					firstName: formData.firstName,
 					lastName: formData.lastName,
 					email: formData.email,
-					password: formData.password,
-				}),
-			});
+				});
 
-			if (response.ok) {
-				// Registration successful
 				setSuccessMessage("Registration successful! Redirecting...");
 
-				// You can redirect to the login page or any other page here
 				setTimeout(() => {
-					window.location.href = "/";
+					navigate("/"); // Redirect to login after successful registration
 				}, 2000);
-			} else {
-				// Registration failed
-				const errorData = await response.json();
-				setErrorMessage(errorData.message || "Registration failed");
+			} catch (error) {
+				console.error("Error during registration:", error);
+				setErrorMessage(error.message); // Firebase will give detailed error messages which can be displayed directly
 			}
-		} catch (error) {
-			console.error("Error during registration:", error);
-			setErrorMessage("An error occurred. Please try again.");
+		} else {
+			setErrorMessage(
+				"You must agree to the terms and conditions to register."
+			);
 		}
 	};
 

@@ -1,4 +1,6 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase/firebase";
 import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
 	Bars3Icon,
@@ -19,13 +21,29 @@ const navigation = {
 	],
 };
 
+const user = auth.currentUser;
+const userName = user ? `${user.email}` : null;
+
+const handleLogout = () => {
+	auth
+		.signOut() // This logs out the current authenticated user
+		.then(() => {
+			setIsAuthenticated(false); // Update your local state to reflect that the user is no longer authenticated
+			console.log("Logged out successfully");
+		})
+		.catch((error) => {
+			console.error("Error logging out: ", error);
+		});
+};
+
 function classNames(...classes) {
 	return classes.filter(Boolean).join(" ");
 }
 
 export default function Header() {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-	const [isAuthenticated, setIsAuthenticated] = useState(false); // Set this based on your authentication logic
+	const [isAuthenticated, setIsAuthenticated] = useState(false);
+	const [userEmail, setUserEmail] = useState("");
 
 	// Function to handle user logout (if needed)
 	const handleLogout = () => {
@@ -33,6 +51,22 @@ export default function Header() {
 		setIsAuthenticated(false);
 		setMobileMenuOpen(false); // Close mobile menu after logout
 	};
+
+	useEffect(() => {
+		// This will set up a listener to Firebase's authentication state
+		const unsubscribe = onAuthStateChanged(auth, (user) => {
+			if (user) {
+				setIsAuthenticated(true);
+				setUserEmail(user.email);
+			} else {
+				setIsAuthenticated(false);
+				setUserEmail("");
+			}
+		});
+
+		// Cleanup the listener on component unmount
+		return () => unsubscribe();
+	}, []);
 
 	return (
 		<div className="bg-white">
@@ -91,9 +125,11 @@ export default function Header() {
 									{isAuthenticated ? (
 										// If user is authenticated, display user's name and logout button
 										<div className="px-4">
-											<p className="text-base font-medium text-gray-900">
-												User's Name
-											</p>
+											{userEmail && (
+												<span className="text-sm font-medium text-white">
+													{userEmail}
+												</span>
+											)}
 											<button
 												type="button"
 												onClick={handleLogout}
@@ -142,9 +178,11 @@ export default function Header() {
 								{isAuthenticated ? (
 									// If user is authenticated, display user's name and logout button
 									<>
-										<span className="text-sm font-medium text-white">
-											User's Name
-										</span>
+										{userEmail && (
+											<span className="text-sm font-medium text-white">
+												{userEmail}
+											</span>
+										)}
 										<button
 											type="button"
 											onClick={handleLogout}
